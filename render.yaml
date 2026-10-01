@@ -1,0 +1,16 @@
+# Render - Despliegue automático
+# Conectar este repositorio en render.com -> New Web Service
+services:
+  - type: web
+    name: pos-keyfacil
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PORT
+        value: 10000
+    # Para base de datos persistente: agrega un PostgreSQL en Render
+    # y copia la DATABASE_URL como variable de entorno (se detecta automáticamente)

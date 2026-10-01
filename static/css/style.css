@@ -1,0 +1,73 @@
+/* POS KeyFácil - Estilos personalizados */
+.nav-btn.active {
+  background: linear-gradient(90deg, #0ea5e9, #6366f1);
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(14,165,233,0.35);
+}
+.nav-btn.active svg { color: white; }
+
+.product-card {
+  transition: all 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+}
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  border-color: #0ea5e9;
+}
+.product-card:active { transform: scale(0.97); }
+
+.cart-item {
+  animation: slideIn 0.2s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.qty-btn {
+  width: 28px; height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 6px; font-weight: bold; cursor: pointer;
+  transition: background 0.15s;
+}
+.qty-btn:hover { background: #e0f2fe; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Ticket de impresión */
+@media print {
+  body * { visibility: hidden; }
+  #ticketPrint, #ticketPrint * { visibility: visible; }
+  #ticketPrint { position: absolute; left: 0; top: 0; width: 100%; }
+}
+
+.stat-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #0ea5e9, #6366f1);
+  color: white;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn-primary:hover { opacity: 0.92; }
+.btn-primary:active { transform: scale(0.98); }
+
+.low-stock {
+  background: #fef2f2;
+  color: #dc2626;
+}

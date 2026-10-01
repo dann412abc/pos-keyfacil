@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POS KeyFácil - Iniciar Sesión</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'Segoe UI', system-ui, sans-serif; }
+  .gradient-bg { background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #8b5cf6 100%); }
+</style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 mb-4">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+      </div>
+      <h1 class="text-2xl font-bold text-gray-800">POS KeyFácil</h1>
+      <p class="text-gray-500 text-sm mt-1">Sistema de Punto de Venta</p>
+    </div>
+    <form id="loginForm" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
+        <input type="text" id="username" required autocomplete="username"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition"
+          placeholder="admin">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+        <input type="password" id="password" required autocomplete="current-password"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition"
+          placeholder="••••••••">
+      </div>
+      <div id="errorMsg" class="hidden text-red-600 text-sm bg-red-50 p-3 rounded-lg"></div>
+      <button type="submit"
+        class="w-full py-3 bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-semibold rounded-lg hover:opacity-90 transition shadow-lg">
+        Iniciar Sesión
+      </button>
+    </form>
+    <div class="mt-6 p-4 bg-sky-50 rounded-lg text-xs text-gray-600">
+      <p class="font-semibold mb-1">Cuentas de demostración:</p>
+      <p>Admin: <span class="font-mono">admin / admin123</span></p>
+      <p>Cajero: <span class="font-mono">cajero / cajero123</span></p>
+    </div>
+  </div>
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const err = document.getElementById('errorMsg');
+  err.classList.add('hidden');
+  const res = await fetch('/login', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      username: document.getElementById('username').value,
+      password: document.getElementById('password').value
+    })
+  });
+  const data = await res.json();
+  if (data.ok) { window.location.href = '/'; }
+  else {
+    err.textContent = data.error || 'Error al iniciar sesión';
+    err.classList.remove('hidden');
+  }
+});
+</script>
+</body>
+</html>
